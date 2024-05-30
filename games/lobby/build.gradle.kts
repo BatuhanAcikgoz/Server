@@ -1,9 +1,8 @@
 plugins {
     id("server.common-conventions")
-    kotlin("plugin.serialization") version "1.6.21"
 }
 
-group = "com.bluedragonmc.server"
+group = "com.bluedragonmc.games"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -12,14 +11,12 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":common"))
     implementation(libs.minestom)
-    implementation(libs.kmongo)
-    implementation(libs.caffeine)
+    implementation(libs.bundles.messaging)
     implementation(libs.minimessage)
     implementation(libs.bundles.configurate)
-    implementation(libs.bundles.messaging)
-    implementation(libs.serialization.json)
-    implementation(libs.bundles.tinylog)
+    implementation(libs.kmongo)
 }
 
 tasks.getByName<Test>("test") {

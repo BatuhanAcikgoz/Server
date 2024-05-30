@@ -12,7 +12,6 @@ RUN /usr/bin/gradle --console=plain --info --stacktrace --no-daemon build
 # Run the built JAR and expose port 25565
 FROM docker.io/library/eclipse-temurin:17-jre-alpine
 EXPOSE 25565
-EXPOSE 50051
 WORKDIR /server
 
 LABEL com.bluedragonmc.image=server
