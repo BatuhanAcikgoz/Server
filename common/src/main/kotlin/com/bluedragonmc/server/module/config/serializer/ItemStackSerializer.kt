@@ -20,10 +20,10 @@ class ItemStackSerializer : TypeSerializer<ItemStack> {
     private val enchType =
         TypeToken.getParameterized(Map::class.java, Enchantment::class.java, Int::class.javaObjectType).type
 
+
     override fun deserialize(type: Type?, node: ConfigurationNode): ItemStack {
         val material = node.node("material").get<Material>() ?: error("No material present")
         val amount = node.node("amount").getInt(1)
-        @Suppress("UNCHECKED_CAST") val enchantments = node.node("enchants").get(enchType) as Map<Enchantment, Int>?
         val name = node.node("name").get<Component>()?.noItalic()
         val lore = node.node("lore").getList(Component::class.java)
         val dye = node.node("dye").get<Color>()
@@ -38,10 +38,6 @@ class ItemStackSerializer : TypeSerializer<ItemStack> {
 
             if (lore != null) {
                 set(ItemComponent.LORE, lore)
-            }
-
-            if (!enchantments.isNullOrEmpty()) {
-                set(ItemComponent.ENCHANTMENTS, EnchantmentList(enchantments))
             }
 
             build()

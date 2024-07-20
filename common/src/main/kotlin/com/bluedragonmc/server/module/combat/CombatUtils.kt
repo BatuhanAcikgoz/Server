@@ -1,7 +1,5 @@
 package com.bluedragonmc.server.module.combat
 
-import net.minestom.server.entity.Entity
-import net.minestom.server.entity.EntityType
 import net.minestom.server.item.ItemComponent
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.enchant.Enchantment
@@ -27,41 +25,43 @@ object CombatUtils {
 
     fun shouldCauseThorns(level: Int): Boolean = if (level <= 0) false else Random.nextFloat() < 0.15 * level
 
-    fun getThornsDamage(level: Int): Int = if (level > 10) 10 - level else 1 + Random.nextInt(4)
+    fun getThornsDamage(level: Int): Int = if (level > 10) { (10 - level) } else {
+        (1 + Random.nextInt(4))
+    }}
 
-    fun getDamageModifier(enchants: Map<Enchantment, Int>, targetEntity: Entity): Float =
-        if (enchants.containsKey(Enchantment.SHARPNESS)) {
-            enchants[Enchantment.SHARPNESS]!! * 1.25f
-        } else if (enchants.containsKey(Enchantment.SMITE) && isUndead(targetEntity)) {
-            enchants[Enchantment.SMITE]!! * 2.5f
-        } else if (enchants.containsKey(Enchantment.BANE_OF_ARTHROPODS) && isArthropod(targetEntity)) {
-            enchants[Enchantment.BANE_OF_ARTHROPODS]!! * 2.5f
-        } else 0.0f
-
-    fun getArrowDamageModifier(enchants: Map<Enchantment, Int>, targetEntity: Entity): Float =
-        if (enchants.containsKey(Enchantment.POWER))
-            0.5f + enchants[Enchantment.POWER]!! * 0.5f
-        else 0.0f
-
-
-    private val UNDEAD_MOBS = setOf(
-        EntityType.DROWNED,
-        EntityType.HUSK,
-        EntityType.PHANTOM,
-        EntityType.SKELETON,
-        EntityType.SKELETON_HORSE,
-        EntityType.STRAY,
-        EntityType.WITHER,
-        EntityType.WITHER_SKELETON,
-        EntityType.ZOGLIN,
-        EntityType.ZOMBIE,
-        EntityType.ZOMBIE_VILLAGER,
-        EntityType.ZOMBIFIED_PIGLIN,
-    )
-
-    private fun isUndead(entity: Entity) = UNDEAD_MOBS.contains(entity.entityType)
-
-    private fun isArthropod(entity: Entity) =
-        entity.entityType == EntityType.SPIDER || entity.entityType == EntityType.CAVE_SPIDER || entity.entityType == EntityType.ENDERMITE || entity.entityType == EntityType.SILVERFISH
-
-}
+//    fun getDamageModifier(enchants: Map<Enchantment, Int>, targetEntity: Entity): Float =
+//        if (enchants.containsKey(Enchantment.SHARPNESS)) {
+//            enchants[Enchantment.SHARPNESS]!! * 1.25f
+//        } else if (enchants.containsKey(Enchantment.SMITE) && isUndead(targetEntity)) {
+//            enchants[Enchantment.SMITE]!! * 2.5f
+//        } else if (enchants.containsKey(Enchantment.BANE_OF_ARTHROPODS) && isArthropod(targetEntity)) {
+//            enchants[Enchantment.BANE_OF_ARTHROPODS]!! * 2.5f
+//        } else 0.0f
+//
+//    fun getArrowDamageModifier(enchants: Map<Enchantment, Int>, targetEntity: Entity): Float =
+//        if (enchants.containsKey(Enchantment.POWER))
+//            0.5f + enchants[Enchantment.POWER]!! * 0.5f
+//        else 0.0f
+//
+//
+//    private val UNDEAD_MOBS = setOf(
+//        EntityType.DROWNED,
+//        EntityType.HUSK,
+//        EntityType.PHANTOM,
+//        EntityType.SKELETON,
+//        EntityType.SKELETON_HORSE,
+//        EntityType.STRAY,
+//        EntityType.WITHER,
+//        EntityType.WITHER_SKELETON,
+//        EntityType.ZOGLIN,
+//        EntityType.ZOMBIE,
+//        EntityType.ZOMBIE_VILLAGER,
+//        EntityType.ZOMBIFIED_PIGLIN,
+//    )
+//
+//    private fun isUndead(entity: Entity) = UNDEAD_MOBS.contains(entity.entityType)
+//
+//    private fun isArthropod(entity: Entity) =
+//        entity.entityType == EntityType.SPIDER || entity.entityType == EntityType.CAVE_SPIDER || entity.entityType == EntityType.ENDERMITE || entity.entityType == EntityType.SILVERFISH
+//
+//}

@@ -101,8 +101,8 @@ class OldCombatModule(var allowDamage: Boolean = true, var allowKnockback: Boole
 
         eventNode.addListener(PlayerLeaveGameEvent::class.java) { event ->
             // Reset attributes to default
-            event.player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).baseValue = event.player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).attribute.defaultValue()
-            event.player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).baseValue = event.player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).attribute.defaultValue()
+            event.player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).baseValue = event.player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).attribute().defaultValue()
+            event.player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).baseValue = event.player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).attribute().defaultValue()
             event.player.additionalHearts = 0.0f
         }
 
@@ -158,7 +158,7 @@ class OldCombatModule(var allowDamage: Boolean = true, var allowKnockback: Boole
 
             val heldEnchantments = player.inventory.itemInMainHand.get(ItemComponent.ENCHANTMENTS)?.enchantments ?: emptyMap<Enchantment, Int>()
             // Extra damage provided by enchants like sharpness or smite
-            val damageModifier = CombatUtils.getDamageModifier(heldEnchantments, target)
+            val damageModifier = 0.0f
 
             val knockback = (heldEnchantments[Enchantment.KNOCKBACK]
                 ?: 0) + if (player.isSprinting) 1 else 0

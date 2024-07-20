@@ -34,7 +34,7 @@ class PlayerResetModule(val defaultGameMode: GameMode? = null) : GameModule() {
         player.gameMode = gameMode ?: player.gameMode
         player.inventory.clear()
         Attribute.values().forEach { attribute ->
-            player.getAttribute(attribute).modifiers.forEach { modifier ->
+            player.getAttribute(attribute).modifiers().forEach { modifier ->
                 player.getAttribute(attribute).removeModifier(modifier)
             }
         }
