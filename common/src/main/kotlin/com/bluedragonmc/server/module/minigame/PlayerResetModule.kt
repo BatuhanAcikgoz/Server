@@ -2,13 +2,14 @@ package com.bluedragonmc.server.module.minigame
 
 import com.bluedragonmc.server.Game
 import com.bluedragonmc.server.module.GameModule
-import net.kyori.adventure.nbt.CompoundBinaryTag
+
 import net.minestom.server.entity.GameMode
 import net.minestom.server.entity.Player
 import net.minestom.server.entity.attribute.Attribute
 import net.minestom.server.event.Event
 import net.minestom.server.event.EventNode
 import net.minestom.server.event.player.PlayerSpawnEvent
+import net.minestom.server.tag.Tag
 
 /**
  * "Resets" the player when they join the game. This changes some basic attributes to make sure effects don't persist in between games.
@@ -46,7 +47,9 @@ class PlayerResetModule(val defaultGameMode: GameMode? = null) : GameModule() {
         player.isAllowFlying = false
         player.level = 0
         player.exp = 0F
-        player.tagHandler().updateContent(CompoundBinaryTag.empty())
+        player.tagHandler().removeTag(Tag.String("double_jump_blockers"))
+        player.tagHandler().removeTag(Tag.String("seen_glow_teams").list())
+        player.tagHandler().removeTag(Tag.String("current_glow_team"))
         player.stopSpectating()
     }
 }
